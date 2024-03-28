@@ -7,7 +7,7 @@ import Contact from './Pages/Contact';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Navbar from './Components/Navbar';
-
+import Error from './Pages/Error';
 
 function App() {
  
@@ -21,9 +21,9 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-
-
-     </Routes>
+      <Route path="*" element={<Error/>} />
+    
+    </Routes>
      </BrowserRouter>
     </>
   )
