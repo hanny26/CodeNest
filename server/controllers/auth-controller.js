@@ -37,7 +37,7 @@ const register = async (req, res) => {
         token: token,
         user: newUser,
         message: "User Added Successfully",
-        userId : newUser._id.toString(),
+        userId: newUser._id.toString(),
       });
     } else {
       res.status(400).json({
@@ -48,41 +48,37 @@ const register = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Error: " + error.message });
     // next(error);
- 
   }
 };
 
+// User Login logic
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-// User Login logic 
-const login = async(req,res) => {
- try {
-   const {email, password} = req.body;
+    const userExist = await User.findOne({ email });
+    console.log(userExist);
 
-   const userExist = await User.findOne({ email });
-   console.log(userExist);
+    if (!userExist) {
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
 
-   if(!userExist){
-    return res.status(400).json({message: "Invalid Credentials"});
-   }
+    const passwordValid = await bcrypt.compare(password, userExist.password);
+    // const user = await userExhist.comparePassword(password);
 
-   const passwordValid = await bcrypt.compare(password, userExist.password);
-  // const user = await userExhist.comparePassword(password);
- 
-   if(passwordValid){
-    res.status(201).json({
-      token: await userExist.generateToken(),
-      email: userExist.email,
-      message: "login Successfully",
-      userId : userExist._id.toString(),
-    });
-   }else{
-    res.status(401).json({message: "Invalid email or password"});
-   }
-  
- } catch (error) {
-  res.status(500).json({ message: "internal server error" });
- }
- };
+    if (passwordValid) {
+      res.status(201).json({
+        token: await userExist.generateToken(),
+        email: userExist.email,
+        message: "login Successfully",
+        userId: userExist._id.toString(),
+      });
+    } else {
+      res.status(401).json({ message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "internal server error" });
+  }
+};
 
-
-module.exports = { getUser, register, home , login};
+module.exports = { getUser, register, home, login };
