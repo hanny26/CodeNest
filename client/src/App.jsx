@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Navbar from './Components/Navbar';
 import Error from './Pages/Error';
+import Footer from './Components/Footer';
 
 function App() {
  
@@ -24,7 +25,10 @@ function App() {
       <Route path="*" element={<Error/>} />
     
     </Routes>
+    
+      <Footer />
      </BrowserRouter>
+
     </>
   )
 }
