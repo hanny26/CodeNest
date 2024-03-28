@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -7,6 +8,8 @@ const Register = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -14,9 +17,31 @@ const Register = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+
+    try {
+      const response = await fetch("http://localhost:5800/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        setUser({
+          username: "",
+          email: "",
+          password: "",
+        });
+        navigate("/login");
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("register", error);
+    }
   };
 
   return (
@@ -34,11 +59,15 @@ const Register = () => {
               </div>
 
               <div className="registration mt-8">
-                <h1 className="text-3xl font-bold mb-4 text-center">Login Form</h1>
+                <h1 className="text-3xl font-bold mb-4 text-center">
+                  Login Form
+                </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="username" className="block">Username</label>
+                    <label htmlFor="username" className="block">
+                      Username
+                    </label>
                     <input
                       type="text"
                       name="username"
@@ -53,7 +82,9 @@ const Register = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block">Email</label>
+                    <label htmlFor="email" className="block">
+                      Email
+                    </label>
                     <input
                       type="email"
                       name="email"
@@ -68,7 +99,9 @@ const Register = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="password" className="block">Password</label>
+                    <label htmlFor="password" className="block">
+                      Password
+                    </label>
                     <input
                       type="password"
                       name="password"
@@ -82,7 +115,12 @@ const Register = () => {
                     />
                   </div>
 
-                  <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Register Now</button>
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                  >
+                    Register Now
+                  </button>
                 </form>
               </div>
             </div>
