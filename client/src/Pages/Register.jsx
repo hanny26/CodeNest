@@ -31,6 +31,11 @@ const Register = () => {
       });
 
       if (response.ok) {
+        const res_data = await response.json();
+        console.log("response from server", res_data);
+        // storetokenInLS(res_data.token);
+        localStorage.setItem("token", res_data);
+
         setUser({
           username: "",
           email: "",

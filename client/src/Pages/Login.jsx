@@ -37,6 +37,9 @@ const Register = () => {
 
       if (response.ok) {
         alert("Login Successfully");
+        const res_data = await response.json();
+       localStorage.setItem("token", res_data.token);
+
         setUser({ email: "", password: "" });
         navigate("/");
 
