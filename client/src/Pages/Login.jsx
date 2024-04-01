@@ -1,6 +1,7 @@
 // import { set } from "mongoose";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Store/Auth";
 
 const URL = "http://localhost:5800/login";
 
@@ -10,6 +11,9 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+  
+  const storetokenInLS= useAuth();
 
   const navigate = useNavigate();
 
@@ -38,7 +42,10 @@ const Register = () => {
       if (response.ok) {
         alert("Login Successfully");
         const res_data = await response.json();
-       localStorage.setItem("token", res_data.token);
+        // console.log("response from server", res_data);
+        storetokenInLS(res_data.token);
+        // localStorage.setItem("token", res_data);
+     
 
         setUser({ email: "", password: "" });
         navigate("/");

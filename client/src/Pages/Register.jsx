@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../Store/Auth";
 const Register = () => {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
+
+  const { storetokenInLS } = useAuth();
 
   const navigate = useNavigate();
 
@@ -33,9 +35,9 @@ const Register = () => {
       if (response.ok) {
         const res_data = await response.json();
         console.log("response from server", res_data);
-        // storetokenInLS(res_data.token);
-        localStorage.setItem("token", res_data);
-
+        // store the token in localhost
+        storetokenInLS(res_data.token);
+        // localStorage.setItem("token", res_data);
         setUser({
           username: "",
           email: "",
@@ -65,7 +67,7 @@ const Register = () => {
 
               <div className="registration mt-8">
                 <h1 className="text-3xl font-bold mb-4 text-center">
-                  Login Form
+                  Register page
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-4">

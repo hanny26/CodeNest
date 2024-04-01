@@ -65,7 +65,7 @@ const login = async (req, res) => {
 
     const passwordValid = await bcrypt.compare(password, userExist.password);
     // const user = await userExhist.comparePassword(password);
-
+    
     if (passwordValid) {
       res.status(201).json({
         token: await userExist.generateToken(),
@@ -73,6 +73,7 @@ const login = async (req, res) => {
         message: "login Successfully",
         userId: userExist._id.toString(),
       });
+      console.log("login Successfully");
     } else {
       res.status(401).json({ message: "Invalid email or password" });
     }

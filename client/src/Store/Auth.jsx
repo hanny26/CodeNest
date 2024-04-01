@@ -1,9 +1,23 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-    return <AuthContext.Provider>
+
+    const storetokenInLS = (serverToken) =>{
+      return localStorage.setItem("token", serverToken);
+    }
+
+    return(<AuthContext.Provider value={{ storetokenInLS }}>
         {children}
-        </AuthContext.Provider>;
+        </AuthContext.Provider>);
+};
+
+export const useAuth = () => {
+    const authContext = useContext(AuthContext);
+  if(!authContextValue){
+    throw new Error('useAuth must be used within AuthProvider');
+  };
+  return authContextValue;
 }
+
