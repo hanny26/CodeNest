@@ -1,7 +1,7 @@
 // import { set } from "mongoose";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Store/Auth";
+import { useAuth } from "./Store/Auth.jsx";
 
 const URL = "http://localhost:5800/login";
 

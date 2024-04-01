@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Store/Auth";
+import { useAuth } from "../Store/Auth.jsx";
 const Register = () => {
   const [user, setUser] = useState({
     username: "",
@@ -8,9 +8,9 @@ const Register = () => {
     password: "",
   });
 
-  const { storetokenInLS } = useAuth();
-
   const navigate = useNavigate();
+  
+  const { storetokenInLS } = useAuth();
 
   const handleInput = (e) => {
     let name = e.target.name;
