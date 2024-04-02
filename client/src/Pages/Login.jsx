@@ -13,7 +13,7 @@ const Register = () => {
   });
 
   
-  const storetokenInLS= useAuth();
+  const {storetokenInLS} = useAuth();
 
   const navigate = useNavigate();
 

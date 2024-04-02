@@ -9,6 +9,7 @@ import Register from './Pages/Register';
 import Navbar from './Components/Navbar';
 import Error from './Pages/Error';
 import Footer from './Components/Footer';
+import Logout from './Pages/Logout';
 
 function App() {
  
@@ -23,6 +24,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error/>} />
+      <Route path="/logout" element={<Logout />} />
     
     </Routes>
     
