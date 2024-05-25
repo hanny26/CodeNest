@@ -20,4 +20,3 @@ export const useAuth = () => {
   };
   return authContextValue;
 }
-

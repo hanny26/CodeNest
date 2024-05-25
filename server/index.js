@@ -6,6 +6,8 @@ const router = require("./router/auth-router");
 // const contactRoute = require("./router/contact-router");
 const connectDB = require("./db/db");
 const errorMiddleware = require("./middlewares/errorMiddleware");
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 
 // handling cors policy

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
  const bcrypt = require("bcryptjs");
  const jwt = require("jsonwebtoken");
+ const env = require("dotenv");
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -46,7 +47,7 @@ userSchema.pre("save",async function(next){
 // }
 
 // JSON Web Token
- userSchema.methods.generateToken = async function(){
+userSchema.methods.generateToken = async function(){
   try {
      return jwt.sign({
       userId : this._id.toString(),
@@ -61,6 +62,7 @@ userSchema.pre("save",async function(next){
     console.error(error);
   }
  };
+
 
 // define model or the collection name
 const User = mongoose.model("User", userSchema);

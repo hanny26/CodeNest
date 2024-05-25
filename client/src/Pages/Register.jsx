@@ -43,7 +43,10 @@ const Register = () => {
           email: "",
           password: "",
         });
-        navigate("/login");
+        navigate("/login")
+      } else {
+        const errorData = await response.json();
+        console.error("Error data:", errorData);
       }
       console.log(response);
     } catch (error) {

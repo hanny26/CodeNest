@@ -1,5 +1,6 @@
 const User = require("../models/user-models");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const getUser = async (req, res) => {
   try {
@@ -81,5 +82,28 @@ const login = async (req, res) => {
     res.status(500).json({ message: "internal server error" });
   }
 };
+
+
+// refresh token 
+// const refreshToken = async (req, res) => {
+//   const { refreshToken } = req.body;
+//   if (!refreshToken) return res.status(403).json({ message: "Access Denied, No Refresh Token Provided" });
+
+//   try {
+//     const { userId } = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET_KEY);
+//     const user = await User.findById(userId);
+//     if (!user) return res.status(403).json({ message: "User not found" });
+
+//     const newAccessToken = jwt.sign(
+//       { userId: user._id.toString(), email: user.email },
+//       process.env.JWT_SECRET_KEY,
+//       { expiresIn: '15m' }
+//     );
+
+//     res.status(200).json({ accessToken: newAccessToken });
+//   } catch (error) {
+//     res.status(403).json({ message: "Invalid Refresh Token" });
+//   }
+// };
 
 module.exports = { getUser, register, home, login };
