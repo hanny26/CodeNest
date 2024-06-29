@@ -56,7 +56,7 @@ const Register = () => {
 
   return (
     <>
-      <section className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <section className="bg-gray-100 min-h-screen flex items-center justify-center m-6">
         <main className="max-w-lg bg-white p-8 rounded-lg shadow-lg">
           <div className="section-registration">
             <div className="container mx-auto">
